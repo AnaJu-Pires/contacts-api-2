@@ -1,5 +1,5 @@
 # AULA 3
-*Fotos de comprovação de cada atividade estão na pasta 'FotosComprovaçãoAula3'*
+##### *Fotos de comprovação de cada atividade estão na pasta 'FotosComprovaçãoAula3'*
 ---
 ### Exercicio 1:
 1. Primeiramente criei no **repositório** o método **findByNomeContainingIgnoreCase** que ensina o programa a buscar no banco de dados todos os contatos com um nome específico.
