@@ -13,23 +13,23 @@
 3. por fim, **save(existingContact)** para salvar as alterações.
 ---
 ### Exercicio 3:
-##### 1. Diferença REST vs. SOAP:
+#### 1. Diferença REST vs. SOAP:
 O REST é um jeito mais simples de fazer APIs, usando JSON e os comandos da web (GET, POST). O SOAP é um protocolo mais antigo e burocrático que obriga o uso de XML.
-##### 2. Onde o SOAP ainda é usado:
+#### 2. Onde o SOAP ainda é usado:
 O SOAP ainda é usado em sistemas que precisam de segurança e regras muito rígidas, como bancos ou sistemas antigos do governo.
-##### 3. Vantagens do REST:
+#### 3. Vantagens do REST:
 A vantagem do REST é que ele é mais leve, rápido e fácil. A desvantagem é que nós temos que montar a segurança, diferente do SOAP que já vem com mais coisas prontas.
-*Obs: Para web e mobile, REST é o padrão porque é mais simples.*
-##### 4. WS-Security vs. Segurança REST:
+###### *Obs: Para web e mobile, REST é o padrão porque é mais simples.*
+#### 4. WS-Security vs. Segurança REST:
 O WS-Security é o padrão de segurança que já vem embutido no SOAP. No REST, a gente combina outras ferramentas para ter segurança, como HTTPS e Tokens.
-*Obs: A segurança do SOAP vem "de fábrica", a do REST a gente "monta".*
-##### 5. Modelo de Richardson:
+###### *Obs: A segurança do SOAP vem "de fábrica", a do REST a gente "monta".*
+#### 5. Modelo de Richardson:
 É um modelo que classifica o "nível de qualidade" de uma API REST, indo do 0 ao 3.
-Funcionando assim:
+##### Funcionando assim:
 A gente sai de um "túnel" único (Nível 0), passa a organizar em "gavetas" (Nível 1), depois usa "etiquetas" de ação (GET, POST) nessas gavetas (Nível 2), e por fim, a própria gaveta te dá um "mapa" do que fazer a seguir (Nível 3).
-##### 6. O que é GraphQL:
-###### É uma alternativa ao REST. Em vez de vários endpoints, o GraphQL tem um só, e é o cliente que decide quais campos ele quer receber na resposta.
-######*Obs: No REST, o servidor sempre manda o contato inteiro. No GraphQL, o cliente pode pedir "me manda só o nome", e o servidor manda só o nome.*
+#### 6. O que é GraphQL:
+É uma alternativa ao REST. Em vez de vários endpoints, o GraphQL tem um só, e é o cliente que decide quais campos ele quer receber na resposta.
+###### *Obs: No REST, o servidor sempre manda o contato inteiro. No GraphQL, o cliente pode pedir "me manda só o nome", e o servidor manda só o nome.*
 ---
 ### Desafio 1:
 1. Primeiro, eu criei o Model **Address.java** com todos os seus campos. A parte mais importante foi configurar a relação entre as tabelas:
