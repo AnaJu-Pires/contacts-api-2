@@ -1,6 +1,8 @@
 package br.ifsp.contacts.model;
 import java.util.List;
 
+import org.springframework.validation.annotation.Validated;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -9,6 +11,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 /**
  * Classe que representa o modelo de dados para um Contato.
  * 
@@ -26,8 +31,13 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "O nome é obrigatório.")
     private String nome;
+    @NotBlank(message = "O telefone é obrigatório.")
+    @Size(min = 8, max = 15, message = "O telefone deve ter entre 8 e 15 caracteres.")
     private String telefone;
+    @NotBlank(message = "O email é obrigatório.")
+    @Email(message = "O formato do email é inválido.")
     private String email;
 
     /**
@@ -49,6 +59,7 @@ public class Contact {
     @OneToMany(mappedBy = "contact", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Address> addresses;
+
 
     // Construtor vazio exigido pelo JPA
     public Contact() {}

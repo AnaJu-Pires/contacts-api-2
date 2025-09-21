@@ -42,3 +42,9 @@ A gente sai de um "túnel" único (Nível 0), passa a organizar em "gavetas" (N�
 4. Também criei um **AddressController** novo para gerenciar endereços de forma geral (como listar todos), separando bem as responsabilidades da API.
 ---
 ### Desafio 2:
+1. Primeiro, adicionei a dependência *spring-boot-starter-validation* no pom.xml. Depois, fui na classe Contact.java e usei as anotações de validação para definir as regras:
+- @NotBlank no nome, email e telefone para garantir que não cheguem vazios.
+- @Email no email para verificar se o formato é válido.
+-  @Size no telefone para definir um tamanho mínimo e máximo.
+2. Ai, no ContactController, eu ativei essas regras. Nos métodos de POST e PUT/PATCH (onde a API recebe dados), eu coloquei a anotação @Valid antes do @RequestBody. Isso força o Spring a checar os dados antes de tentar salvar.
+
