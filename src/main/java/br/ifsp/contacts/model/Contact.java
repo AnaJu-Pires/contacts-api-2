@@ -1,7 +1,6 @@
 package br.ifsp.contacts.model;
 import java.util.List;
 
-import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
