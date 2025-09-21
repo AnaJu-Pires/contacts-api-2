@@ -1,4 +1,5 @@
 package br.ifsp.contacts.model;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,6 +13,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 /**
  * Classe que representa o modelo de dados para um Contato.
@@ -19,87 +22,82 @@ import jakarta.validation.constraints.Size;
  * @Entity indica que este objeto será mapeado para uma tabela
  * no banco de dados (em cenários de persistência com JPA).
  */
+
 @Entity
 public class Contact {
-
-    /**
-     * @Id indica que este campo é a chave primária (primary key) da entidade.
-     * @GeneratedValue permite que o banco de dados (ou o provedor JPA) 
-     * gere automaticamente um valor único para cada novo registro.
-     */
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "O nome é obrigatório.")
+    
+    @NotBlank(message = "O nome não pode estar vazio")
     private String nome;
-    @NotBlank(message = "O telefone é obrigatório.")
-    @Size(min = 8, max = 15, message = "O telefone deve ter entre 8 e 15 caracteres.")
-    private String telefone;
-    @NotBlank(message = "O email é obrigatório.")
-    @Email(message = "O formato do email é inválido.")
+    
+    @NotBlank(message = "O email não pode estar vazio")
+    @Email(message = "Formato de email inválido")
     private String email;
-
-    /**
-     * Lista de todos os endereços que pertencem a este contato.
-     *
-     * A anotação @OneToMany configura a relação um-para-muitos e automatiza
-     * o gerenciamento dos endereços junto com o contato.
-     *
-     * - mappedBy="contact": Informa que a relação já é gerenciada pelo campo "contact"
-     * na classe Address, evitando a criação de tabelas desnecessárias.
-     *
-     * - cascade=ALL: Facilita as operações. Se este contato for salvo ou apagado,
-     * todos os seus endereços associados também serão.
-     *
-     * - orphanRemoval=true: Garante que, se um endereço for removido desta lista,
-     * ele também seja apagado do banco de dados, não ficando "órfão".
-     */
-
-    @OneToMany(mappedBy = "contact", orphanRemoval = true, cascade = CascadeType.ALL)
+    
+    @NotBlank(message = "O telefone não pode estar vazio")
+    @Size(min = 8, max = 15, message = "O telefone deve ter entre 8 e 15 caracteres")
+    @Pattern(regexp = "\\d+", message = "O telefone deve conter apenas números")
+    private String telefone;
+    
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Address> addresses;
-
-
-    // Construtor vazio exigido pelo JPA
-    public Contact() {}
-
-    // Construtor para facilitar a criação de objetos
-    public Contact(String nome, String telefone, String email) {
-        this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
+    @NotEmpty(message = "O contato deve ter pelo menos um endereço")
+    private List<Address> addresses = new ArrayList<>();
+    
+    public Contact() {
     }
-
-    // Getters e Setters
+    
+    public Contact(String nome, String email, String telefone) {
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+    }
+    
     public Long getId() {
         return id;
     }
-
+    
     public String getNome() {
         return nome;
     }
+    
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getTelefone() {
-        return telefone;
-    }
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
+    
     public String getEmail() {
         return email;
     }
+    
     public void setEmail(String email) {
         this.email = email;
     }
-
+    
+    public String getTelefone() {
+        return telefone;
+    }
+    
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+    
     public List<Address> getAddresses() {
         return addresses;
     }
+    
     public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
+        if (addresses != null) {
+            addresses.forEach(address -> address.setContact(this)); 
+            
+            if (this.addresses == null) { 
+                this.addresses = new ArrayList<>();
+            }
+            
+            this.addresses.clear(); 
+            this.addresses.addAll(addresses);         
+        }
     }
 }
