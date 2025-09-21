@@ -28,8 +28,8 @@ O WS-Security é o padrão de segurança que já vem embutido no SOAP. No REST, 
 Funcionando assim:
 A gente sai de um "túnel" único (Nível 0), passa a organizar em "gavetas" (Nível 1), depois usa "etiquetas" de ação (GET, POST) nessas gavetas (Nível 2), e por fim, a própria gaveta te dá um "mapa" do que fazer a seguir (Nível 3).
 ##### 6. O que é GraphQL:
-É uma alternativa ao REST. Em vez de vários endpoints, o GraphQL tem um só, e é o cliente que decide quais campos ele quer receber na resposta.
-*Obs: No REST, o servidor sempre manda o contato inteiro. No GraphQL, o cliente pode pedir "me manda só o nome", e o servidor manda só o nome.*
+###### É uma alternativa ao REST. Em vez de vários endpoints, o GraphQL tem um só, e é o cliente que decide quais campos ele quer receber na resposta.
+######*Obs: No REST, o servidor sempre manda o contato inteiro. No GraphQL, o cliente pode pedir "me manda só o nome", e o servidor manda só o nome.*
 ---
 ### Desafio 1:
 1. Primeiro, eu criei o Model **Address.java** com todos os seus campos. A parte mais importante foi configurar a relação entre as tabelas:
